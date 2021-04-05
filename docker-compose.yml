@@ -18,7 +18,11 @@ postgres:
   ports:
     - 5432:5432
   environment:
+    DATABASE_HOST: postgres
+    POSTGRES_USER: postgres
+    POSTGRES_DB: postgres  
     POSTGRES_PASSWORD: postgres
+
   entrypoint:
     - /entrypoint.sh
   volumes:
