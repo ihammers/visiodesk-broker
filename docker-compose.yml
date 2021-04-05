@@ -16,3 +16,10 @@ testdata:
   build: ./testdata
   links:
     - postgres
+
+portainer:
+  image:  portainer/portainer-ce
+  container_name: portainer
+  command: -H unix:///var/run/docker.sock
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
