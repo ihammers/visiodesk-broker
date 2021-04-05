@@ -20,13 +20,13 @@ postgres:
   hostname: postgres
   ports:
     - 5432:5432
-  entrypoint:
-    - /entrypoint.sh
+  # entrypoint:
+  #   - /entrypoint.sh
   volumes:
     - ./postgres/database:/var/lib/postgresql/data
-    - ./postgres/data.sql:/data.sql
-    - ./postgres/pipeline_data.sql:/pipeline_data.sql
-    - ./postgres/entrypoint.sh:/entrypoint.sh
+    # - ./postgres/data.sql:/data.sql
+    # - ./postgres/pipeline_data.sql:/pipeline_data.sql
+    # - ./postgres/entrypoint.sh:/entrypoint.sh
 
 pgadmin-compose:
   image: dpage/pgadmin4
