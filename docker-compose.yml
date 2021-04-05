@@ -19,8 +19,8 @@ postgres:
     - 5432:5432
   environment:
     POSTGRES_PASSWORD: postgres
-  # entrypoint:
-  #   - ./postgres/entrypoint.sh
+  entrypoint:
+    - entrypoint.sh
   volumes:
     - ./postgres/database:/var/lib/postgresql/data
     - ./postgres/data.sql:/data.sql
