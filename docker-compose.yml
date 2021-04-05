@@ -11,6 +11,8 @@ grafana:
 postgres:
   image: postgres
   container_name: postgres
+  ports:
+      - ${POSTGRES_PORT:-5432}:5432
 
 testdata:
   build: ./testdata
