@@ -25,9 +25,9 @@ postgres:
   #   - ./postgres/entrypoint.sh
   volumes:
     - ./postgres/database:/var/lib/postgresql/data
-    - ./postgres/entrypoint.sh:/docker-entrypoint-initdb.d/
     - ./postgres/data.sql:/data.sql
     - ./postgres/pipeline_data.sql:/pipeline_data.sql
+    - ./postgres/entrypoint.sh:/docker-entrypoint-initdb.d/entrypoint.sh
 
 portainer:
   image:  portainer/portainer-ce
