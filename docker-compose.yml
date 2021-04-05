@@ -19,11 +19,10 @@ postgres:
   ports:
     - 5432:5432
   environment:
-    DATABASE_HOST: postgres
-    POSTGRES_USER: postgres
-    POSTGRES_DB: postgres  
+    # DATABASE_HOST: postgres
+    # POSTGRES_USER: postgres
+    # POSTGRES_DB: postgres  
     POSTGRES_PASSWORD: postgres
-
   entrypoint:
     - /entrypoint.sh
   volumes:
@@ -39,7 +38,7 @@ pgadmin-compose:
     PGADMIN_DEFAULT_EMAIL: "test@gmail.com"
     PGADMIN_DEFAULT_PASSWORD: "test123!"
   ports: 
-    - "16543:80"
+    - "8000:80"
   links: 
     - postgres    
 
