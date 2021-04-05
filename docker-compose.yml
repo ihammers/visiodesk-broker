@@ -14,10 +14,10 @@ postgres:
   ports:
       - 5432:5432
 
-testdata:
-  build: ./testdata
-  links:
-    - postgres
+# testdata:
+#   build: ./testdata
+#   links:
+#     - postgres
 
 portainer:
   image:  portainer/portainer-ce
