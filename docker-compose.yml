@@ -28,14 +28,14 @@ postgres:
     - ./postgres/entrypoint.sh:/docker-entrypoint-initdb.d/entrypoint.sh
 
 pgadmin-compose:
-    image: dpage/pgadmin4
-    environment: 
-        PGADMIN_DEFAULT_EMAIL: "test@gmail.com"
-        PGADMIN_DEFAULT_PASSWORD: "test123!"
-    ports: 
-        - "16543:80"
-    depends_on: 
-        - postgres    
+  image: dpage/pgadmin4
+  environment: 
+    PGADMIN_DEFAULT_EMAIL: "test@gmail.com"
+    PGADMIN_DEFAULT_PASSWORD: "test123!"
+  ports: 
+    - "16543:80"
+  depends_on: 
+    - postgres    
 
 portainer:
   image:  portainer/portainer-ce
