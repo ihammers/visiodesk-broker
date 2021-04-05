@@ -1,5 +1,5 @@
 grafana:
-  build: grafana:latest
+  image: grafana/grafana:latest
   container_name: grafana
   ports:
     - "3000:3000"
@@ -9,6 +9,7 @@ grafana:
     - ./grafana/postgres.yml:/etc/grafana/provisioning/datasources/postgres.yml
     - ./grafana/dashboards.yml:/etc/grafana/provisioning/dashboards/dashboards.yml
     - ./grafana/dashboard.json:/var/lib/grafana/dashboards/dashboard.json
+
   environment:
     GF_USERS_DEFAULT_THEME: "light"
 
