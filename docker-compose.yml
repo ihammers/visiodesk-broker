@@ -9,7 +9,7 @@ grafana:
     GF_USERS_DEFAULT_THEME: "light"
 
 postgres:
-  image: postgres
+  image: postgres:latest
   container_name: postgres
 
 testdata:
