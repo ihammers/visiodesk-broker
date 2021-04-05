@@ -16,18 +16,22 @@ postgres:
   image: postgres
   container_name: postgres
   ports:
-      - 5432:5432
-
-# testdata:
-#   build: ./testdata
-#   links:
-#     - postgres
+    - 5432:5432
+  environment:
+    POSTGRES_PASSWORD: 'postgres'
+  entrypoint:
+    - ./postgres/entrypoint.sh
+  volumes:
+    - ./postgres/database:/var/lib/postgresql/data
+    - ./postgres/entrypoint.sh:/usr/local/bin/
+    - ./postgres/data.sql:/data.sql
+    - ./postgres/pipeline_data.sql:/pipeline_data.sql
 
 portainer:
   image:  portainer/portainer-ce
   container_name: portainer
   command: -H unix:///var/run/docker.sock
   ports:
-      - 9000:9000
+      - "9000:9000"
   volumes:
     - /var/run/docker.sock:/var/run/docker.sock
