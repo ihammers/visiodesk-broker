@@ -7,6 +7,10 @@ grafana:
     - postgres
   environment:
     GF_USERS_DEFAULT_THEME: "light"
+  volumes:
+    - ./grafana/postgres.yml:/etc/grafana/provisioning/datasources/postgres.yml
+    - ./grafana/dashboards.yml:/etc/grafana/provisioning/dashboards/dashboards.yml
+    - ./grafana/dashboard.json:/var/lib/grafana/dashboards/dashboard.json
 
 postgres:
   image: postgres
