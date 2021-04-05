@@ -19,8 +19,8 @@ postgres:
     - 5432:5432
   environment:
     POSTGRES_PASSWORD: postgres
-  entrypoint:
-    - /docker-entrypoint-initdb.d/entrypoint.sh
+  # entrypoint:
+  #   - /docker-entrypoint-initdb.d/entrypoint.sh
   volumes:
     - ./postgres/database:/var/lib/postgresql/data
     - ./postgres/data.sql:/data.sql
