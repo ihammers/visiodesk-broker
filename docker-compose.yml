@@ -21,11 +21,11 @@ postgres:
     POSTGRES_USER: ​'postgres​'
     POSTGRES_PASSWORD: 'postgres'
     POSTGRES_DB: 'postgres'
-  entrypoint:
-    - ./postgres/entrypoint.sh
+  # entrypoint:
+  #   - ./postgres/entrypoint.sh
   volumes:
     - ./postgres/database:/var/lib/postgresql/data
-    - ./postgres/entrypoint.sh:/usr/local/bin/
+    # - ./postgres/entrypoint.sh:/usr/local/bin/
     - ./postgres/data.sql:/data.sql
     - ./postgres/pipeline_data.sql:/pipeline_data.sql
 
