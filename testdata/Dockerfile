@@ -1,4 +1,4 @@
-FROM postgres:latest
+FROM postgres
 
 COPY entrypoint.sh /usr/local/bin/
 COPY data.sql /data.sql
