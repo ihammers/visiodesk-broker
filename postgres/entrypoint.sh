@@ -26,10 +26,10 @@ for try in {1..10}; do
   sleep 1
 done
 
-run_file /data.sql
+run_file data.sql
 
 for i in {1..100}; do
-  run_file /pipeline_data.sql
+  run_file pipeline_data.sql
 done
 
 # fail a few tasks
