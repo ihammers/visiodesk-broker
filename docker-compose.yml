@@ -34,7 +34,7 @@ pgadmin-compose:
     PGADMIN_DEFAULT_PASSWORD: "test123!"
   ports: 
     - "16543:80"
-  depends_on: 
+  links: 
     - postgres    
 
 portainer:
