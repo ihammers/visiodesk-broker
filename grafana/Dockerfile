@@ -1,4 +1,4 @@
-FROM grafana/grafana
+FROM grafana
 
 COPY ./postgres.yml /etc/grafana/provisioning/datasources/postgres.yml
 COPY ./dashboards.yml /etc/grafana/provisioning/dashboards/dashboards.yml
