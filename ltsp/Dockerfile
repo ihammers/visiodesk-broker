@@ -1,7 +1,7 @@
 FROM ubuntu:16.04 as ltsp-base
 
-ADD nbd-server-wrapper.sh /bin/
-ADD /patches/feature-grub.diff /patches/feature-grub.diff
+#ADD nbd-server-wrapper.sh /bin/
+#ADD /patches/feature-grub.diff /patches/feature-grub.diff
 RUN apt-get -y update \
  && apt-get -y install \
       ltsp-server \
