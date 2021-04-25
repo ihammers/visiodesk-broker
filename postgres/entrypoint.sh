@@ -28,10 +28,6 @@ done
 
 run_file /data.sql
 
-for i in {1..100}; do
-  run_file /pipeline_data.sql
-done
-
 # fail a few tasks
 run_query "WITH cte AS (SELECT project, stage FROM pipeline_stages ORDER BY random() LIMIT 10) \
            UPDATE pipeline_stages SET failed = 't' FROM cte WHERE \
