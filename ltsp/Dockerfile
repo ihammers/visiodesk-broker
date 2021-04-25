@@ -85,3 +85,27 @@ RUN echo 'APT::Install-Recommends "0";\nAPT::Install-Suggests "0";' \
 
 # Установим ядро
 RUN ltsp-chroot apt-get -y install linux-generic-hwe-16.04
+
+
+FROM basesystem as builder
+
+# Скопируем cpuinfo (для сборки из исходников)
+RUN cp /proc/cpuinfo /opt/ltsp/amd64/proc/cpuinfo
+
+# Скачаем и скомпилируем Mellanox driver
+RUN ltsp-chroot sh -cx \
+   '  VERSION=4.3-1.0.1.0-ubuntu16.04-x86_64 \
+   && curl -L http://www.mellanox.com/downloads/ofed/MLNX_EN-${VERSION%%-ubuntu*}/mlnx-en-${VERSION}.tgz \
+      | tar xzf - \
+   && export \
+        DRIVER_DIR="$(ls -1 | grep "MLNX_OFED_LINUX-\|mlnx-en-")" \
+        KERNEL="$(ls -1t /lib/modules/ | head -n1)" \
+   && cd "$DRIVER_DIR" \
+   && ./*install --kernel "$KERNEL" --without-dkms --add-kernel-support \
+   && cd - \
+   && rm -rf "$DRIVER_DIR" /tmp/mlnx-en* /tmp/ofed*'
+
+# Сохраним модули ядра
+RUN ltsp-chroot sh -c \
+    ' export KERNEL="$(ls -1t /usr/src/ | grep -m1 "^linux-headers" | sed "s/^linux-headers-//g")" \
+   && tar cpzf /modules.tar.gz /lib/modules/${KERNEL}/updates'
