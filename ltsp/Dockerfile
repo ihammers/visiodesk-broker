@@ -1,9 +1,10 @@
 FROM ubuntu:16.04 as ltsp-base
 
-#ADD nbd-server-wrapper.sh /bin/
-#ADD /patches/feature-grub.diff /patches/feature-grub.diff
+# ADD nbd-server-wrapper.sh /bin/
+# ADD /patches/feature-grub.diff /patches/feature-grub.diff
 RUN apt-get -y update \
  && apt-get -y install \
+ 	  apt-utils \
       ltsp-server \
       tftpd-hpa \
       nbd-server \
@@ -16,6 +17,6 @@ RUN apt-get -y update \
       /usr/share/debootstrap/functions \
 
 # Добавим поддержку EFI и загрузчик Grub (#1745251)
- && patch -p2 -d /usr/sbin < /patches/feature-grub.diff \
+# && patch -p2 -d /usr/sbin < /patches/feature-grub.diff \
  && rm -rf /var/lib/apt/lists \
  && apt-get clean
