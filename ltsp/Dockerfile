@@ -109,3 +109,16 @@ RUN ltsp-chroot sh -cx \
 RUN ltsp-chroot sh -c \
     ' export KERNEL="$(ls -1t /usr/src/ | grep -m1 "^linux-headers" | sed "s/^linux-headers-//g")" \
    && tar cpzf /modules.tar.gz /lib/modules/${KERNEL}/updates'
+
+FROM basesystem as ltsp-image
+
+# Получим модули ядра
+COPY --from=builder /opt/ltsp/amd64/modules.tar.gz /opt/ltsp/amd64/modules.tar.gz
+
+# Установим модули ядра
+RUN ltsp-chroot sh -c \
+    ' export KERNEL="$(ls -1t /usr/src/ | grep -m1 "^linux-headers" | sed "s/^linux-headers-//g")" \
+   && tar xpzf /modules.tar.gz \
+   && depmod -a "${KERNEL}" \
+   && rm -f /modules.tar.gz'
+
