@@ -1,5 +1,4 @@
-FROM ubuntu:16.04
-#FROM champion:ubuntu-base
+FROM champion:ubuntu-base
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y update \
  && apt-get -y install \
