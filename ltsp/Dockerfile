@@ -1,5 +1,5 @@
 # FROM ubuntu:16.04 as ltsp-base
-FROM champion:ubuntu-base #custom ubuntu 14.04 image
+FROM champion:ubuntu-base
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y update \
  && apt-get -y install \
