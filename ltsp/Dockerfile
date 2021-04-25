@@ -4,7 +4,7 @@ FROM ubuntu:16.04
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y update \
  && apt-get -y install \
       ltsp-server \
-      ltsp-build-client --arch="amd64" --fat-client \
+      ltsp-build-client \
       ltsp-config lts.conf \
       tftpd-hpa \
       nbd-server \
