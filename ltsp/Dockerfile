@@ -1,7 +1,5 @@
 FROM ubuntu:16.04 as ltsp-base
 
-# ADD nbd-server-wrapper.sh /bin/
-# ADD /patches/feature-grub.diff /patches/feature-grub.diff
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y update \
  && apt-get -y install \
  	  apt-utils \
@@ -17,6 +15,5 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y update \
       /usr/share/debootstrap/functions \
 
 # Добавим поддержку EFI и загрузчик Grub (#1745251)
-# && patch -p2 -d /usr/sbin < /patches/feature-grub.diff \
  && rm -rf /var/lib/apt/lists \
  && apt-get clean
