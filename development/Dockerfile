@@ -31,8 +31,8 @@ RUN apt-get clean all
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 RUN sed -i "0,/nginx/s/nginx/docker-nginx/i" /usr/share/nginx/html/index.html
 
-RUN wget -O /opt/paho/ "https://github.com/eclipse/paho.mqtt.c.git" \
-&& wget -O /opt/paho/ "https://github.com/eclipse/paho.mqtt.cpp.git" 
+RUN wget -O /opt/ "https://github.com/eclipse/paho.mqtt.c.git" \
+&& wget -O /opt/ "https://github.com/eclipse/paho.mqtt.cpp.git" 
 #&& cmake /opt/paho/paho.mqtt.c \
 #      -Bbuild -H. -DPAHO_WITH_SSL=ON \
 #      --build build/ --target install \
