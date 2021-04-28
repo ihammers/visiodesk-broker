@@ -36,6 +36,11 @@ portainer:
     - /var/run/docker.sock:/var/run/docker.sock
     - ./portainer/data:/data
 
-ltsp:
-  build: ./ltsp
-  container_name: ltsp
+development:
+  build: ./development
+  container_name: development
+  ports:
+      - "2222:22"
+  volumes:
+    - ./development/deployment :/opt/deployment
+
