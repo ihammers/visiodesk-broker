@@ -5,7 +5,7 @@ FROM debian:buster-slim
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Update Ubuntu Software repository
-RUN apt-get -y update
+RUN apt-get -y update \
  && apt-get -y install \
       wget
       #libssl-dev \
