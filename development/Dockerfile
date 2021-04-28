@@ -4,11 +4,10 @@ FROM debian:buster-slim
 # Disable Prompt During Packages Installation
 ARG DEBIAN_FRONTEND=noninteractive
 
-RUN debian
-
 # Update Ubuntu Software repository
 RUN apt-get -y update \
  && apt-get -y install \
+      nginx \
       wget
       #libssl-dev \
       #build-essential \
@@ -27,7 +26,8 @@ RUN apt-get -y update \
       #graphviz \
       #libssl-dev \
       #openssh-server
-      
+
+RUN apt-get clean all
 #RUN wget -O /opt/paho "https://github.com/eclipse/paho.mqtt.c.git" \
 #&& wget -O /opt/paho "https://github.com/eclipse/paho.mqtt.cpp.git" 
 
@@ -49,7 +49,6 @@ RUN apt-get -y update \
 #ENV HOME /root
 
 # Define working directory.
-#WORKDIR /root
+# WORKDIR /root
 
-# Define default command.
-CMD ["wget -O /opt/paho 'https://github.com/eclipse/paho.mqtt.c.git']
+CMD [ "nginx" ]
