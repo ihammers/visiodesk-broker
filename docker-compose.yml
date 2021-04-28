@@ -37,10 +37,11 @@ portainer:
     - ./portainer/data:/data
 
 development:
-  build: ./development
+  image: debian:buster-slim
+  #build: ./development
   container_name: development
-  #ports:
-  #    - "2222:22"
+  ports:
+    - "2222:22"
   #volumes:
   #  - ./development/deployment :/opt/deployment
 
