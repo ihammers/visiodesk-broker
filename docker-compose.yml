@@ -39,8 +39,8 @@ portainer:
 development:
   build: ./development
   container_name: development
-  ports:
-      - "2222:22"
-  volumes:
-    - ./development/deployment :/opt/deployment
+  #ports:
+  #    - "2222:22"
+  #volumes:
+  #  - ./development/deployment :/opt/deployment
 
