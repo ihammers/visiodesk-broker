@@ -8,32 +8,31 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get -y update \
  && apt-get -y install \
       nginx \
-      wget
-      #libssl-dev \
-      #build-essential \
-      #gdb \
-      #zlib1g-dev \
-      #libpq-dev \
-      #postgresql-server-dev-all \
-      #build-essential \
-      #gcc \
-      #make \
-      #cmake \
-      #cmake-gui \
-      #cmake-curses-gui \
-      #git \
-      #doxygen \
-      #graphviz \
-      #libssl-dev \
-      #openssh-server
+      wget \
+      libssl-dev \
+      build-essential \
+      gdb \
+      zlib1g-dev \
+      libpq-dev \
+      postgresql-server-dev-all \
+      build-essential \
+      gcc \
+      make \
+      cmake \
+      cmake-gui \
+      cmake-curses-gui \
+      git \
+      doxygen \
+      graphviz \
+      libssl-dev \
+      openssh-server
 
 RUN apt-get clean all
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 RUN sed -i "0,/nginx/s/nginx/docker-nginx/i" /usr/share/nginx/html/index.html
 
-#RUN wget -O /opt/paho "https://github.com/eclipse/paho.mqtt.c.git" \
-#&& wget -O /opt/paho "https://github.com/eclipse/paho.mqtt.cpp.git" 
-
+RUN wget -O /opt/paho "https://github.com/eclipse/paho.mqtt.c.git" \
+&& wget -O /opt/paho "https://github.com/eclipse/paho.mqtt.cpp.git" 
 #&& cmake /opt/paho/paho.mqtt.c \
 #      -Bbuild -H. -DPAHO_WITH_SSL=ON \
 #      --build build/ --target install \
@@ -46,7 +45,7 @@ RUN sed -i "0,/nginx/s/nginx/docker-nginx/i" /usr/share/nginx/html/index.html
 #      --build build/ --target install \
 #&& ldconfig
 
-#EXPOSE 22
+EXPOSE 22
 
 # Set environment variables.
 #ENV HOME /root
