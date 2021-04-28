@@ -24,8 +24,8 @@ RUN apt-get -y update \
       libssl-dev \
       #openssh-server
       
-RUN wget -O /opt/paho "https://github.com/eclipse/paho.mqtt.c.git" \
-&& wget -O /opt/paho "https://github.com/eclipse/paho.mqtt.cpp.git" 
+#RUN wget -O /opt/paho "https://github.com/eclipse/paho.mqtt.c.git" \
+#&& wget -O /opt/paho "https://github.com/eclipse/paho.mqtt.cpp.git" 
 
 #&& cmake /opt/paho/paho.mqtt.c \
 #      -Bbuild -H. -DPAHO_WITH_SSL=ON \
