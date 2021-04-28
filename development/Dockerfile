@@ -5,23 +5,23 @@ FROM ubuntu:14.04
 
 RUN apt-get -y update \
  && apt-get -y install \
-      wget \
-      libssl-dev \
-      build-essential \
-      gdb \
-      zlib1g-dev \
-      libpq-dev \
+      #wget \
+      #libssl-dev \
+      #build-essential \
+      #gdb \
+      #zlib1g-dev \
+      #libpq-dev \
       #postgresql-server-dev-all \
-      build-essential \
-      gcc \
-      make \
-      cmake \
+      #build-essential \
+      #gcc \
+      #make \
+      #cmake \
       #cmake-gui \
-      cmake-curses-gui \
-      git \
-      doxygen \
-      graphviz \
-      libssl-dev \
+      #cmake-curses-gui \
+      #git \
+      #doxygen \
+      #graphviz \
+      #libssl-dev \
       openssh-server
       
 #RUN wget -O /opt/paho "https://github.com/eclipse/paho.mqtt.c.git" \
