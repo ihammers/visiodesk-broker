@@ -3,8 +3,8 @@
 # Pull base image.
 FROM ubuntu:14.04
 
-RUN apt-get -y update \
- && apt-get -y install \
+RUN apt-get -y update 
+ #&& apt-get -y install \
       #wget \
       #libssl-dev \
       #build-essential \
@@ -22,7 +22,7 @@ RUN apt-get -y update \
       #doxygen \
       #graphviz \
       #libssl-dev \
-      openssh-server
+      #openssh-server
       
 #RUN wget -O /opt/paho "https://github.com/eclipse/paho.mqtt.c.git" \
 #&& wget -O /opt/paho "https://github.com/eclipse/paho.mqtt.cpp.git" 
@@ -39,4 +39,4 @@ RUN apt-get -y update \
 #      --build build/ --target install \
 #&& ldconfig
 
-EXPOSE 22
+#EXPOSE 22
