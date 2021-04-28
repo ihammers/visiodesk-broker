@@ -1,17 +1,13 @@
-FROM debian:buster-slim
-
 # Pull base image.
-#FROM ubuntu
+FROM debian:buster-slim
 
 # Disable Prompt During Packages Installation
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Update Ubuntu Software repository
-RUN apt update
-
-#RUN apt-get -y update 
- #&& apt-get -y install \
-      #wget \
+RUN apt-get -y update
+ && apt-get -y install \
+      wget
       #libssl-dev \
       #build-essential \
       #gdb \
@@ -54,4 +50,4 @@ RUN apt update
 #WORKDIR /root
 
 # Define default command.
-CMD ["bash"]
+CMD ["wget -O /opt/paho 'https://github.com/eclipse/paho.mqtt.c.git']
