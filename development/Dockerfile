@@ -4,6 +4,8 @@ FROM debian:buster-slim
 # Disable Prompt During Packages Installation
 ARG DEBIAN_FRONTEND=noninteractive
 
+RUN debian
+
 # Update Ubuntu Software repository
 RUN apt-get -y update \
  && apt-get -y install \
