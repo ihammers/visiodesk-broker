@@ -1,7 +1,7 @@
-#FROM debian:buster-slim
+FROM debian:buster-slim
 
 # Pull base image.
-FROM ubuntu
+#FROM ubuntu
 
 # Disable Prompt During Packages Installation
 ARG DEBIAN_FRONTEND=noninteractive
