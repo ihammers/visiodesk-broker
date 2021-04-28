@@ -37,8 +37,8 @@ portainer:
     - ./portainer/data:/data
 
 development:
-  image: debian:buster-slim
-  #build: ./development
+  #image: debian:buster-slim
+  build: ./development
   container_name: development
   ports:
     - "2222:22"
