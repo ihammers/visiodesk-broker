@@ -1,9 +1,9 @@
 #FROM debian:buster-slim
 
 # Pull base image.
-FROM ubuntu:14.04
+FROM ubuntu:18.04
 
-RUN apt-get -y update 
+#RUN apt-get -y update 
  #&& apt-get -y install \
       #wget \
       #libssl-dev \
@@ -42,10 +42,10 @@ RUN apt-get -y update
 #EXPOSE 22
 
 # Set environment variables.
-ENV HOME /root
+#ENV HOME /root
 
 # Define working directory.
-WORKDIR /root
+#WORKDIR /root
 
 # Define default command.
 CMD ["bash"]
