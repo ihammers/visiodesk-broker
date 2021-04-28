@@ -28,6 +28,9 @@ RUN apt-get -y update \
       #openssh-server
 
 RUN apt-get clean all
+RUN echo "daemon off;" >> /etc/nginx/nginx.conf
+RUN sed -i "0,/nginx/s/nginx/docker-nginx/i" /usr/share/nginx/html/index.html
+
 #RUN wget -O /opt/paho "https://github.com/eclipse/paho.mqtt.c.git" \
 #&& wget -O /opt/paho "https://github.com/eclipse/paho.mqtt.cpp.git" 
 
