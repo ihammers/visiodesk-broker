@@ -25,14 +25,15 @@ RUN apt-get -y update \
       doxygen \
       graphviz \
       libssl-dev \
+      mc \
       openssh-server
 
 RUN apt-get clean all
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 RUN sed -i "0,/nginx/s/nginx/docker-nginx/i" /usr/share/nginx/html/index.html
 
-RUN wget -O /opt/paho/paho.mqtt.c "https://github.com/eclipse/paho.mqtt.c.git" \
-&& wget -O /opt/paho/paho.mqtt.cpp "https://github.com/eclipse/paho.mqtt.cpp.git" 
+RUN git clone "https://github.com/eclipse/paho.mqtt.c.git" \
+&& git clone "https://github.com/eclipse/paho.mqtt.cpp.git" 
 #&& cmake /opt/paho/paho.mqtt.c \
 #      -Bbuild -H. -DPAHO_WITH_SSL=ON \
 #      --build build/ --target install \
