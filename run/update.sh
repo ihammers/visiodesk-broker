@@ -8,3 +8,6 @@ sudo git pull
 cd /opt/services
 sudo docker-compose build
 sudo docker-compose up -d --force-recreate --remove-orphans
+
+docker run -it ubuntu
+docker ps
