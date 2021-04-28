@@ -1,5 +1,5 @@
 #FROM debian:buster-slim
- 
+
 # Pull base image.
 FROM ubuntu:14.04
 
@@ -16,13 +16,13 @@ RUN apt-get -y update \
       gcc \
       make \
       cmake \
-      cmake-gui \
+      #cmake-gui \
       cmake-curses-gui \
       git \
       doxygen \
       graphviz \
       libssl-dev \
-      openssh-server
+      #openssh-server
       
 RUN wget -O /opt/paho "https://github.com/eclipse/paho.mqtt.c.git" \
 && wget -O /opt/paho "https://github.com/eclipse/paho.mqtt.cpp.git" 
