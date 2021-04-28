@@ -22,7 +22,7 @@ RUN apt-get -y update \
       doxygen \
       graphviz \
       libssl-dev \
-      #openssh-server
+      openssh-server
       
 #RUN wget -O /opt/paho "https://github.com/eclipse/paho.mqtt.c.git" \
 #&& wget -O /opt/paho "https://github.com/eclipse/paho.mqtt.cpp.git" 
