@@ -1,5 +1,5 @@
 #FROM debian:buster-slim
-FROM dockerfile/ubuntu
+FROM ubuntu
 
 RUN apt-get -y update \
  && apt-get -y install \
