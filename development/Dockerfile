@@ -19,8 +19,8 @@ RUN apt-get -y update \
       doxygen \
       graphviz \
       libssl-dev \
-      #openssh-server \
-&& wget -O /opt/paho "https://github.com/eclipse/paho.mqtt.c.git" \
+      openssh-server
+RUN wget -O /opt/paho "https://github.com/eclipse/paho.mqtt.c.git" \
 && cmake /opt/paho/paho.mqtt.c \
       -Bbuild -H. -DPAHO_WITH_SSL=ON \
       --build build/ --target install \
