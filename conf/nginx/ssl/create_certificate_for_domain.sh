@@ -13,6 +13,8 @@ else
   KEY_OPT="-keyout"
 fi
 
+KEY_OPT="-keyout"
+
 DOMAIN=$1
 COMMON_NAME=${2:-$1}
 
