@@ -48,7 +48,7 @@ RUN git clone "https://github.com/eclipse/paho.mqtt.c.git" /opt/paho/paho.mqtt.c
 EXPOSE 22
 
 # Set environment variables.
-#ENV HOME /root
+# ENV HOME /root
 
 # Define working directory.
 # WORKDIR /root

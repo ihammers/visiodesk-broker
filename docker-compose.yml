@@ -1,47 +1,97 @@
-postgres:
-  image: postgres
-  container_name: postgres
-  restart: always
-  environment:
-    POSTGRES_PASSWORD: postgres
-  hostname: postgres
-  ports:
-    - 5432:5432
-  # entrypoint:
-  #   - /entrypoint.sh
-  volumes:
-    - ./postgres/database:/var/lib/postgresql/data
-    # - ./postgres/data.sql:/data.sql
-    # - ./postgres/pipeline_data.sql:/pipeline_data.sql
-    # - ./postgres/entrypoint.sh:/entrypoint.sh
+# Docker-compose
+version: '3.7'
 
-pgadmin-compose:
-  image: dpage/pgadmin4
-  container_name: pgadmin4
-  environment: 
-    PGADMIN_DEFAULT_EMAIL: "test@gmail.com"
-    PGADMIN_DEFAULT_PASSWORD: "test123!"
-  ports: 
-    - "8000:80"
-  links: 
-    - postgres    
+services:
 
-portainer:
-  image:  portainer/portainer-ce
-  container_name: portainer
-  command: -H unix:///var/run/docker.sock
-  ports:
-      - "9000:9000"
-  volumes:
-    - /var/run/docker.sock:/var/run/docker.sock
-    - ./portainer/data:/data
+  nginx:
+    image: nginxproxy/nginx-proxy:alpine
+    container_name: proxy
+    volumes:
+      - ./conf/nginx/www:/usr/share/nginx/html
+      - ./conf/nginx/conf:/etc/nginx/conf.d
+      - ./data/nginx/dhparam:/etc/nginx/dhparam
+      - ./data/nginx/vhost:/etc/nginx/vhost.d
+      - ./data/nginx/certs:/etc/nginx/certs
+      #- /run/docker.sock:/tmp/docker.sock:ro
+    restart: "always"
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - backend
 
-development:
-  #image: debian:buster-slim
-  build: ./development
-  container_name: development
-  ports:
-    - "2222:22"
-  #volumes:
-  #  - ./development/deployment :/opt/deployment
+  postgres:
+    image: postgres
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+    hostname: postgres
+    ports:
+      - 5044:5432
+    # entrypoint:
+    #   - /entrypoint.sh
+    volumes:
+      - ./postgres/database:/var/lib/postgresql/data
+      # - ./postgres/data.sql:/data.sql
+      # - ./postgres/pipeline_data.sql:/pipeline_data.sql
+      # - ./postgres/entrypoint.sh:/entrypoint.sh
 
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4
+    environment: 
+      PGADMIN_DEFAULT_EMAIL: "admin@visiodesk.net"
+      PGADMIN_DEFAULT_PASSWORD: "admin"
+    links: 
+      - postgres    
+
+  portainer:
+    image:  portainer/portainer-ce
+    container_name: portainer
+    command: -H unix:///var/run/docker.sock
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./portainer/data:/data
+
+  development:
+    #image: debian:buster-slim
+    build: ./development
+    container_name: development
+    ports:
+      - "5005:22"
+    #volumes:
+    #  - ./development/deployment :/opt/deployment
+
+  rabbit1:
+    image: rabbitmq:3-management
+    hostname: rabbit1
+    container_name: rabbit1
+    restart: always
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USERNAME}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+      RABBITMQ_DEFAULT_VHOST: "/manager/rabbit/"
+    ports:
+      - 5045:15675
+      - 5083:1883
+      - 5183:8883
+    user: root
+    networks:
+      - backend
+    volumes:
+      - ./conf/rabbit/enabled_plugins:/etc/rabbitmq/enabled_plugins
+      - ./data/rabbit:/var/lib/rabbitmq
+      - ./log/rabbit:/var/log/rabbitmq
+
+  networks:
+    
+    backend:
+      driver: bridge
+      ipam:
+        driver: default
+        config:
+          - subnet: 172.16.16.0/24
+            gateway: 172.16.16.1
+            ip_range: 172.16.0.0/24
