@@ -62,14 +62,14 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./portainer/data:/data
 
-  #development:
+  development:
     #image: debian:buster-slim
-    #build: ./development
-    #container_name: development
-    #ports:
-    #  - "5005:22"
-    #volumes:
-    #  - ./development/deployment :/opt/deployment
+    build: ./development
+    container_name: development
+    ports:
+      - "5005:22"
+    volumes:
+      - ./development/deployment :/opt/deployment
 
   rabbit1:
     image: rabbitmq:3-management
