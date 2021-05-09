@@ -85,13 +85,13 @@ services:
       - ./data/rabbit:/var/lib/rabbitmq
       - ./log/rabbit:/var/log/rabbitmq
 
-  networks:
-    
-    backend:
-      driver: bridge
-      ipam:
-        driver: default
-        config:
-          - subnet: 172.16.16.0/24
-            gateway: 172.16.16.1
-            ip_range: 172.16.0.0/24
+networks:
+  
+  backend:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.16.0/24
+          gateway: 172.16.16.1
+          ip_range: 172.16.0.0/24
