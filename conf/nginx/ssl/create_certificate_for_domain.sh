@@ -16,7 +16,7 @@ fi
 DOMAIN=$1
 COMMON_NAME=${2:-$1}
 
-SUBJECT="/C=RU/ST=None/L=SPB/O=Element/CN=$COMMON_NAME"
+SUBJECT="/C=RU/ST=None/L=SPB/O=NIPElement/CN=$COMMON_NAME"
 NUM_OF_DAYS=999
 
 openssl req -new -newkey rsa:2048 -sha256 -nodes $KEY_OPT rootCA.key -subj "$SUBJECT" -out device.csr
@@ -29,6 +29,7 @@ openssl x509 -req -in device.csr -CA rootCA.pem -CAkey rootCA.key -CAcreateseria
 
 mv device.csr $DOMAIN.csr
 cp device.crt $DOMAIN.crt
+cp device.crt rootCA.crt
 
 # remove temp file
 rm -f device.crt;
