@@ -33,6 +33,10 @@ sudo docker-compose up -d --force-recreate
 #mkdir /opt/services/data/containers
 #docker save -o /opt/services/data/containers/containers-one.tar jwilder/nginx-proxy:latest rabbitmq:3-management portainer/portainer-ce mariadb:10.5 phpmyadmin jboss/wildfly alpine mariadb/maxscale:2.4
 
+# Создать SSL сертификат
+cd /opt/services/conf/nginx/ssl/
+sh create_certificate_for_domain.sh visiodesk.net
+
 # Установлено
 echo ' '
 echo '************************************'
