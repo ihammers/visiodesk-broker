@@ -9,8 +9,8 @@ services:
     volumes:
       - ./conf/nginx/www:/usr/share/nginx/html:ro
       - ./conf/nginx/conf:/etc/nginx/conf.d
-      - ./conf/nginx/ssl/nginx.crt:/etc/nginx/ssl/nginx.crt:ro
-      - ./conf/nginx/ssl/nginx.key:/etc/nginx/ssl/nginx.key:ro
+      - ./conf/nginx/ssl/rootCA.crt:/etc/nginx/ssl/rootCA.crt:ro
+      - ./conf/nginx/ssl/rootCA.key:/etc/nginx/ssl/rootCA.key:ro
       - ./data/nginx/dhparam:/etc/nginx/dhparam
       - ./data/nginx/vhost:/etc/nginx/vhost.d
       - ./data/nginx/certs:/etc/nginx/certs
