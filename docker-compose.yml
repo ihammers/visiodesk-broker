@@ -31,6 +31,8 @@ services:
       - 5044:5432
     # entrypoint:
     #   - /entrypoint.sh
+    networks:
+      - backend
     volumes:
       - ./postgres/database:/var/lib/postgresql/data
       # - ./postgres/data.sql:/data.sql
@@ -52,6 +54,8 @@ services:
     command: -H unix:///var/run/docker.sock
     ports:
       - "9000:9000"
+    networks:
+      - backend
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./portainer/data:/data
@@ -79,9 +83,9 @@ services:
       - 5045:15675
       - 5083:1883
       - 5183:8883
-    user: root
     networks:
       - backend
+    user: root
     volumes:
       - ./conf/rabbit/enabled_plugins:/etc/rabbitmq/enabled_plugins
       - ./data/rabbit:/var/lib/rabbitmq
