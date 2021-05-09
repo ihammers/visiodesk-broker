@@ -21,9 +21,13 @@ COMMON_NAME=${2:-$1}
 SUBJECT="/C=RU/ST=None/L=SPB/O=Element/CN=$COMMON_NAME"
 NUM_OF_DAYS=999
 
-openssl req -new -newkey rsa:2048 -sha256 -nodes -keyout rootCA.key -subj "$SUBJECT" -out device.csr
+openssl req -x509 -new -nodes -key rootCA.key -sha256 -days 1024 -subj "$SUBJECT" -out rootCA.pem
+
+openssl req -new -newkey rsa:2048 -sha256 -nodes $KEY_OPT rootCA.key -subj "$SUBJECT" -out device.csr
 
 cat v3.ext | sed s/%%DOMAIN%%/$COMMON_NAME/g > /tmp/__v3.ext
+
+
 
 openssl x509 -req -in device.csr -CA rootCA.pem -CAkey rootCA.key -CAcreateserial -out device.crt -days $NUM_OF_DAYS -sha256 -extfile /tmp/__v3.ext
 
