@@ -34,6 +34,18 @@ body {
 body app-root {
   display: flex;
 }
+app-sidebar {
+  width: 256px;
+}
+app-chats {
+  width: 370px;
+}
+app-chat-area {
+  flex-grow: 2;
+}
+app-help-desk {
+  width: 370px;
+}
 ::-webkit-scrollbar {
   width: 3px;
   /* ширина для вертикального скролла */
@@ -55,6 +67,26 @@ body app-root {
   display: flex;
   flex-direction: row-reverse;
   min-height: 20px;
+}
+.chat-item__dot-notification {
+  height: 6px;
+  width: 6px;
+  background: #ff3b30;
+  border-radius: 3px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  display: none;
+}
+.chat-item__mobile-notification {
+  padding: 2px 6px;
+  font-size: 12px;
+  background: #ff3b30;
+  border-radius: 10px;
+  position: absolute;
+  top: -3px;
+  right: -9px;
+  display: none;
 }
 .notification {
   padding: 2px 6px;
@@ -94,7 +126,8 @@ body app-root {
   margin: auto;
 }
 /* search header */
-.chats__header, .help-desk__header {
+.chats__header,
+.help-desk__header {
   padding: 12px 16px 12px 16px;
   display: flex;
   align-items: center;
@@ -124,13 +157,47 @@ body app-root {
   opacity: 0.7;
   font-weight: 400;
 }
-.chats__header_icon, .help-desk__header_icon {
+.chats__header_icon,
+.help-desk__header_icon {
   padding: 8px;
   background-color: #333436;
   border-radius: 8px;
   margin-left: 8px;
 }
 /* search header */
+@media screen and (max-width: 1360px) {
+  app-sidebar {
+    width: 72px;
+  }
+}
+@media screen and (max-width: 1023px) {
+  app-chats {
+    width: 320px;
+  }
+
+  app-chats {
+    display: none;
+  }
+}
+@media screen and (max-width: 768px) {
+  app-chats {
+    display: none;
+  }
+}
+@media screen and (max-width: 640px) {
+  app-root {
+    flex-direction: column-reverse;
+  }
+
+  app-help-desk {
+    display: none;
+  }
+
+  app-sidebar {
+    height: 72px;
+    width: 100%;
+  }
+}
 @font-face {
     font-family: 'Roboto';
     src: url('Roboto-Thin.woff2') format('woff2'), url('Roboto-Thin.woff') format('woff');

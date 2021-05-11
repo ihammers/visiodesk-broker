@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\WORK\mriya\_tmp\visio\v12\src\polyfills.ts */"hN/g");
+module.exports = __webpack_require__(/*! C:\Users\kiril\Desktop\visioDESK\visio\src\polyfills.ts */"hN/g");
 
 
 /***/ }),
