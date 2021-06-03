@@ -200,5 +200,7 @@
     return layer
   }
 
+  L.control.mousePosition().addTo(map);
+
   init('map')
 }(window))
