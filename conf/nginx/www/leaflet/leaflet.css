@@ -25,6 +25,10 @@
 	        user-select: none;
 	  -webkit-user-drag: none;
 	}
+/* Prevents IE11 from highlighting tiles in blue */
+.leaflet-tile::selection {
+	background: transparent;
+}
 /* Safari renders non-retina tile on retina better with this, but Chrome is worse */
 .leaflet-safari .leaflet-tile {
 	image-rendering: -webkit-optimize-contrast;
@@ -45,7 +49,8 @@
 .leaflet-container .leaflet-marker-pane img,
 .leaflet-container .leaflet-shadow-pane img,
 .leaflet-container .leaflet-tile-pane img,
-.leaflet-container img.leaflet-image-layer {
+.leaflet-container img.leaflet-image-layer,
+.leaflet-container .leaflet-tile {
 	max-width: none !important;
 	max-height: none !important;
 	}
@@ -127,13 +132,10 @@
 	pointer-events: none;
 	}
 .leaflet-top {
-	top: 50px;
+	top: 0;
 	}
 .leaflet-right {
-	right: 460px; /* 380px */
-	}
-.leaflet-right .map {
-	right: 10px; /* 380px */
+	right: 0;
 	}
 .leaflet-bottom {
 	bottom: 0;
@@ -149,7 +151,7 @@
 	float: right;
 	}
 .leaflet-top .leaflet-control {
-	margin-top: 50px;
+	margin-top: 10px;
 	}
 .leaflet-bottom .leaflet-control {
 	margin-bottom: 10px;
@@ -171,7 +173,6 @@
 	opacity: 0;
 	-webkit-transition: opacity 0.2s linear;
 	   -moz-transition: opacity 0.2s linear;
-	     -o-transition: opacity 0.2s linear;
 	        transition: opacity 0.2s linear;
 	}
 .leaflet-fade-anim .leaflet-map-pane .leaflet-popup {
@@ -188,14 +189,12 @@
 .leaflet-zoom-anim .leaflet-zoom-animated {
 	-webkit-transition: -webkit-transform 0.25s cubic-bezier(0,0,0.25,1);
 	   -moz-transition:    -moz-transform 0.25s cubic-bezier(0,0,0.25,1);
-	     -o-transition:      -o-transform 0.25s cubic-bezier(0,0,0.25,1);
 	        transition:         transform 0.25s cubic-bezier(0,0,0.25,1);
 	}
 .leaflet-zoom-anim .leaflet-tile,
 .leaflet-pan-anim .leaflet-tile {
 	-webkit-transition: none;
 	   -moz-transition: none;
-	     -o-transition: none;
 	        transition: none;
 	}
 
@@ -212,6 +211,7 @@
 .leaflet-grab {
 	cursor: -webkit-grab;
 	cursor:    -moz-grab;
+	cursor:         grab;
 	}
 .leaflet-crosshair,
 .leaflet-crosshair .leaflet-interactive {
@@ -227,6 +227,7 @@
 	cursor: move;
 	cursor: -webkit-grabbing;
 	cursor:    -moz-grabbing;
+	cursor:         grabbing;
 	}
 
 /* marker & overlays interactivity */
@@ -240,7 +241,8 @@
 
 .leaflet-marker-icon.leaflet-interactive,
 .leaflet-image-layer.leaflet-interactive,
-.leaflet-pane > svg path.leaflet-interactive {
+.leaflet-pane > svg path.leaflet-interactive,
+svg.leaflet-image-layer.leaflet-interactive path {
 	pointer-events: visiblePainted; /* IE 9-10 doesn't have auto */
 	pointer-events: auto;
 	}
@@ -248,7 +250,7 @@
 /* visual tweaks */
 
 .leaflet-container {
-	/*background: #ddd;*/
+	background: #ddd;
 	outline: 0;
 	}
 .leaflet-container a {
@@ -265,7 +267,7 @@
 
 /* general typography */
 .leaflet-container {
-	font: 16px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
+	font: 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
 	}
 
 
@@ -392,7 +394,7 @@
 
 /* Default icon URLs */
 .leaflet-default-icon-path {
-	background-image: url(images/marker-icon.svg);
+	background-image: url(images/marker-icon.png);
 	}
 
 
@@ -465,7 +467,6 @@
 	position: absolute;
 	text-align: center;
 	margin-bottom: 20px;
-	cursor: pointer;
 	}
 .leaflet-popup-content-wrapper {
 	padding: 1px;
@@ -498,15 +499,13 @@
 	-webkit-transform: rotate(45deg);
 	   -moz-transform: rotate(45deg);
 	    -ms-transform: rotate(45deg);
-	     -o-transform: rotate(45deg);
 	        transform: rotate(45deg);
 	}
 .leaflet-popup-content-wrapper,
 .leaflet-popup-tip {
-	color: #ffffff;
-	background: #2F3235;
-    /*backdrop-filter: blur(20px);
-    background-color: rgba(47, 50, 53, 0.8);*/
+	background: white;
+	color: #333;
+	box-shadow: 0 3px 14px rgba(0,0,0,0.4);
 	}
 .leaflet-container a.leaflet-popup-close-button {
 	position: absolute;
@@ -518,21 +517,22 @@
 	width: 18px;
 	height: 14px;
 	font: 16px/14px Tahoma, Verdana, sans-serif;
-	color: #999;
+	color: #c3c3c3;
 	text-decoration: none;
 	font-weight: bold;
 	background: transparent;
 	}
 .leaflet-container a.leaflet-popup-close-button:hover {
-	color: #ccc;
+	color: #999;
 	}
 .leaflet-popup-scrolled {
 	overflow: auto;
 	border-bottom: 1px solid #ddd;
 	border-top: 1px solid #ddd;
 	}
+
 .leaflet-oldie .leaflet-popup-content-wrapper {
-	zoom: 1;
+	-ms-zoom: 1;
 	}
 .leaflet-oldie .leaflet-popup-tip {
 	width: 24px;
@@ -544,16 +544,22 @@
 .leaflet-oldie .leaflet-popup-tip-container {
 	margin-top: -1px;
 	}
+
 .leaflet-oldie .leaflet-control-zoom,
 .leaflet-oldie .leaflet-control-layers,
 .leaflet-oldie .leaflet-popup-content-wrapper,
 .leaflet-oldie .leaflet-popup-tip {
 	border: 1px solid #999;
 	}
+
+
 /* div icon */
+
 .leaflet-div-icon {
-	
+	background: #fff;
+	border: 1px solid #666;
 	}
+
 
 /* Tooltip */
 /* Base styles for the element that has a tooltip */
