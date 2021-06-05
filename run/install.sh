@@ -37,6 +37,13 @@ sudo docker-compose up -d --force-recreate
 cd /opt/services/conf/nginx/ssl/
 sh create_certificate_for_domain.sh visiodesk.net
 
+# Добавление пользователя для RabbitMQ
+sudo docker exec -it rabbit1 /bin/bash
+rabbitmqctl add_user $RABBITMQ_MESSAGE_USERNAME $RABBITMQ_MESSAGE_USER_PASSWORD
+rabbitmqctl add_vhost $RABBITMQ_VHOST
+rabbitmqctl set_permissions -p $RABBITMQ_VHOST $RABBITMQ_MESSAGE_USERNAME ".*" ".*" ".*"
+exit # Выход из контейнера
+
 # Установлено
 echo ' '
 echo '************************************'
